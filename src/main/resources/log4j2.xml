@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration strict="true" monitorInterval="60">
+	
+	<Properties>
+		<Property name="filename">log/banque.log</Property>	
+	</Properties>
+
+	<!-- Appenders : Destinations de message -->
+	<Appenders>
+		<Appender type="Console" name="console">
+			<PatternLayout pattern="%d{DATE} [%t] %5level (%logger) - %msg %n" />
+		</Appender>
+		<Appender type="RollingFile" name="fichier" filename="${filename}" 
+				  filepattern="${filename}-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="%d{DATE} [%t] %5level (%logger) - %msg %n" />	  
+			<Policies>
+				<TimeBasedTriggeringPolicy  />
+			</Policies>
+		</Appender>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="fr.eni.formation.banque.Banque" level="debug" additivity="false">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="fichier" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="fichier" />
+		</Root>
+	</Loggers>
+
+</Configuration>
