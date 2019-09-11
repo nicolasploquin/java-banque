@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import static fr.eni.formation.banque.TypeOperation.CREDIT;
-import static fr.eni.formation.banque.TypeOperation.DEBIT;
+import static fr.eni.formation.banque.Operation.Type.CREDIT;
+import static fr.eni.formation.banque.Operation.Type.DEBIT;
 
 /**
  * @author NPloquin
@@ -31,7 +31,7 @@ public class Console {
 	}
 
 	/**
-	 * @param args
+	 * @param args rien
 	 */
 	public static void main(String[] args) throws IOException {
 		

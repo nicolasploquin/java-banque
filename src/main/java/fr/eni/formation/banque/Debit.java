@@ -15,11 +15,11 @@ public class Debit extends Operation {
 	}
 
 	public Debit(Date date, String libelle, double montant) throws BanqueException{
-		super(TypeOperation.DEBIT, date, libelle, montant);
+		super(Operation.Type.DEBIT, date, libelle, montant);
 	}
 	
 	public Debit(String date, String libelle, double montant) throws BanqueException {
-		super(TypeOperation.DEBIT, date, libelle, montant);
+		super(Operation.Type.DEBIT, date, libelle, montant);
 	}
 	
 	/**

@@ -45,13 +45,13 @@ public abstract class Operation implements Serializable, Comparable<Operation> {
 	protected String libelle = "";
 	protected double montant = 0.0;
 	
-	protected TypeOperation type;
+	protected Type type;
 	
 	public Operation(){
 		super();
 	}
 
-	public Operation(TypeOperation type, Date date, String libelle, double montant) throws BanqueException{
+	public Operation(Type type, Date date, String libelle, double montant) throws BanqueException{
 		super();
 		setDate(date);
 		setLibelle(libelle);
@@ -60,13 +60,14 @@ public abstract class Operation implements Serializable, Comparable<Operation> {
 		}else{
 //			MontantInvalideException e = new MontantInvalideException();
 //			e.setMontant(montant);
+//			throw e;
 			throw new BanqueException("Le montant de l'opération doit être supérieur "
 					+ "ou égal à 0. Montant indiqué : " + montant);
 		}
 	}
 
-	public Operation(TypeOperation type, String date, String libelle, double montant) throws BanqueException{
-		this(type, (Date)null, libelle, montant);		
+	public Operation(Type type, String date, String libelle, double montant) throws BanqueException{
+		this(type, (Date)null, libelle, montant);
 		try {
 			this.date = DATE_FORMAT.parse(date);
 		} catch (ParseException e) {
@@ -135,14 +136,14 @@ public abstract class Operation implements Serializable, Comparable<Operation> {
 	/**
 	 * @return the type
 	 */
-	public TypeOperation getType() {
+	public Type getType() {
 		return type;
 	}
 
 	/**
 	 * @param type the type to set
 	 */
-	public void setType(TypeOperation type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
@@ -167,6 +168,10 @@ public abstract class Operation implements Serializable, Comparable<Operation> {
 			
 		}
 		return false;
+	}
+
+	public static enum Type {
+		CREDIT, DEBIT
 	}
 
 }

@@ -15,7 +15,7 @@ public class Credit extends Operation {
 	}
 	
 	public Credit(Date date, String libelle, double montant) throws BanqueException{
-		super(TypeOperation.CREDIT, date, libelle, montant);
+		super(Operation.Type.CREDIT, date, libelle, montant);
 	}
 
 	
@@ -24,7 +24,7 @@ public class Credit extends Operation {
 	
 	
 	public Credit(String date, String libelle, double montant) throws BanqueException{
-		super(TypeOperation.CREDIT, date, libelle, montant);
+		super(Operation.Type.CREDIT, date, libelle, montant);
 	}
 
 

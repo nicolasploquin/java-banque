@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
  * @author NPloquin
  *
  */
+@SuppressWarnings("unused")
 public class Banque implements Serializable {
 
 	private static final long serialVersionUID = -2863688442586520603L;
@@ -28,7 +29,7 @@ public class Banque implements Serializable {
 	
 	static final Logger log = LogManager.getLogger(Banque.class);
 	
-	private List<Client> clients = new LinkedList<Client>();
+	private List<Client> clients = new LinkedList<>();
 	private Set<Compte> comptes = new HashSet<Compte>();
 
 	static {	
@@ -126,12 +127,8 @@ public class Banque implements Serializable {
 
 	@Override
 	public String toString() {
-				
-		Collections.sort(clients, new Comparator<Client>(){
-			public int compare(Client c1, Client c2){
-				return c1.getPrenom().compareTo(c2.getPrenom());					
-			}
-		});
+
+        clients.sort((c1, c2) -> c1.getPrenom().compareTo(c2.getPrenom()));
 
 		
 //		Comparator clientComparateur = new ClientComparator();

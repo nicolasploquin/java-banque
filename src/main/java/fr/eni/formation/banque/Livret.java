@@ -33,7 +33,7 @@ public class Livret extends Compte {
 	public double calculerInterets(int annee, boolean crediter) {
 		double interets = getSolde() * (taux/100.0);
 		try {
-			if(crediter && interets > 0.0) addOperation(TypeOperation.CREDIT, new Date(), "Intérêt " + annee, interets);
+			if(crediter && interets > 0.0) addOperation(Operation.Type.CREDIT, new Date(), "Intérêt " + annee, interets);
 		} catch (MontantInvalideException e) {} // Le montant ne sera jamais invalide
 		return interets;
 	}

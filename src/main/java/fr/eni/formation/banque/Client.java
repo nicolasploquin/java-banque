@@ -128,15 +128,21 @@ public class Client implements Serializable {
 	}
 
 	public String toString(){
-		String result = String.format("%s %s :\n", getPrenom(), getNom());
-		
+		return String.format("%s %s (%d comptes)\n",
+				getPrenom(), getNom(), getComptes().size());
+
+	}
+
+	public void afficherDetails(){
+		String result = toString();
+
 //		Comparator<Compte> comp = new Comparator<Compte>() {
 //			@Override
 //			public int compare(Compte o1, Compte o2) {
 //				return Double.compare(o1.getSolde(), o2.getSolde());
 //			}
 //		};
-		
+
 //		Collections.sort(comptes, new Comparator<Compte>() {
 //			@Override
 //			public int compare(Compte o1, Compte o2) {
@@ -147,8 +153,8 @@ public class Client implements Serializable {
 		for(Compte compte : comptes){
 			result += compte;
 		}
-		
-		return result;
+
+		System.out.println(result);
 	}
-	
+
 }

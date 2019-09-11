@@ -2,18 +2,16 @@ package fr.eni.formation.banque.app;
 
 import fr.eni.formation.banque.*;
 
-import java.io.IOException;
-
-import static fr.eni.formation.banque.TypeOperation.CREDIT;
-import static fr.eni.formation.banque.TypeOperation.DEBIT;
+import static fr.eni.formation.banque.Operation.Type.CREDIT;
+import static fr.eni.formation.banque.Operation.Type.DEBIT;
 
 /**
  * @author NPloquin
  *
  */
-public class Main {
+public class Main1 {
 	
-	private static Banque banque = new Banque();
+	private static Banque banque;
 	
 	static {
 		System.setProperty("file.encoding", "UTF-8");
@@ -23,7 +21,7 @@ public class Main {
 	/**
 	 * @param args Pas de paramètres attendus
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		System.out.println(banque);
 		
@@ -32,7 +30,7 @@ public class Main {
 	
 
 	private static Banque createBanque() {
-//		Banque banque = new Banque();
+		Banque banque = new Banque();
 		
 		Client client1 = banque.addClient("Martin", "jeAn-marc");
 		Client client2 = banque.addClient("Durand", "soPhie");

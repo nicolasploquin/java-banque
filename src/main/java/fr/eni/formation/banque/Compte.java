@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 import static fr.eni.formation.banque.Banque.DATE_FORMAT;
 import static fr.eni.formation.banque.Banque.log;
+import static fr.eni.formation.banque.Operation.Type.CREDIT;
+import static fr.eni.formation.banque.Operation.Type.DEBIT;
 
 /**
  * @author NPloquin
@@ -144,7 +146,11 @@ public class Compte implements Serializable, Cloneable, Comparable<Compte> {
 		majSolde = operations.add(operation);
 	}
 
-	public Operation addOperation(TypeOperation type, String date, String libelle, double montant) {
+	public Operation addOperation(String date, String libelle, double montant) {
+        return addOperation(montant < 0.0 ? DEBIT : CREDIT, date, libelle, Math.abs(montant));
+	}
+
+	public Operation addOperation(Operation.Type type, String date, String libelle, double montant) {
 
 		Operation operation = null;
 		try {
@@ -160,7 +166,7 @@ public class Compte implements Serializable, Cloneable, Comparable<Compte> {
 		return operation;
 	}
 
-	public Operation addOperation(TypeOperation type, Date date, String libelle, double montant) throws MontantInvalideException {
+	public Operation addOperation(Operation.Type type, Date date, String libelle, double montant) throws MontantInvalideException {
 
 		Operation operation = null;
 		if(montant < 0){
@@ -213,8 +219,8 @@ public class Compte implements Serializable, Cloneable, Comparable<Compte> {
 	public void virement(Compte destinataire, double montant, String libelle) {
 		
 		try {
-			this.addOperation(TypeOperation.DEBIT, new Date(), libelle, montant);
-			destinataire.addOperation(TypeOperation.CREDIT, new Date(), libelle,
+			this.addOperation(Operation.Type.DEBIT, new Date(), libelle, montant);
+			destinataire.addOperation(Operation.Type.CREDIT, new Date(), libelle,
 					montant);
 		} catch (MontantInvalideException e) {
 			System.err.println("L'opération n'a pas pu être créée - Montant invalide : "
@@ -236,21 +242,26 @@ public class Compte implements Serializable, Cloneable, Comparable<Compte> {
 	}
 
 	@Override
-	public String toString() {
-		String result = String.format("%8s : %15s - %s\n", 
-				numero, 
-				Banque.EURO_FORMAT.format(getSolde()), 
-				client==null ? "" : client.getNom()   
-			);
+    public String toString() {
+        String result = String.format("%8s : %15s - %s\n",
+                numero,
+                Banque.EURO_FORMAT.format(getSolde()),
+                client==null ? "" : client.getNom()
+        );
 
-		// Collections.sort(operations, Operation.COMPARATOR);
-		// Collections.sort(operations);
-		for (Operation ope : operations) {
-			result += ope.toString();
-		}
+        return result;
+    }
+    public void afficherDetails() {
+        String result = toString();
 
-		return result;
-	}
+        // Collections.sort(operations, Operation.COMPARATOR);
+        // Collections.sort(operations);
+        for (Operation ope : operations) {
+            result += ope.toString();
+        }
+
+        System.out.println(result);
+    }
 
 	/**
 	 * @see Object#hashCode()
