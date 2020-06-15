@@ -1,4 +1,14 @@
+# IntelliJ
+*.iml
 .idea/
+
+# Eclipse
+.project
+.classpath
+.factorypath
+.settings/
+bin/
+
+# Maven
 target/
 log/
-*.iml
